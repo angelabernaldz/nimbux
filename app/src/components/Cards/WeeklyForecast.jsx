@@ -1,5 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import getWeatherIcon from '../../logic-weather/getWeatherIcon'
+import getWeatherIcon from '../../helpers/getWeatherIcon'
 
 function WeeklyForecast({ dailyForecast }) {
     if (!dailyForecast || !dailyForecast.time) return null

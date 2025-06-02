@@ -14,6 +14,10 @@ function UserButton() {
         .then((user) => {
             setUsername(user.username)
         })
+        .catch((error) => {
+            console.error('Error fetching user:', error)
+            setUsername(null)
+        })
     }, [])
 
     const handleClick = () => {

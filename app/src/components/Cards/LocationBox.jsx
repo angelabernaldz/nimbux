@@ -1,4 +1,4 @@
-import logicWeather from '../../logic-weather'
+import helpers from '../../helpers'
 
 function LocationBox({ currentLocation }) {
     const currentWeather = currentLocation.current
@@ -32,7 +32,7 @@ function LocationBox({ currentLocation }) {
                 {/* Weather icon */}
                 <div className="flex justify-center items-center">
                     <div className="overflow-hidden w-64 h-64 -mt-8">
-                        {logicWeather.getWeatherIcon(currentWeather.weather_code, currentWeather.is_day)}
+                        {helpers.getWeatherIcon(currentWeather.weather_code, currentWeather.is_day)}
                     </div>
                 </div>
             {/* Oher variables */}

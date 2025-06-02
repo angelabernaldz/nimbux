@@ -1,4 +1,4 @@
-import getWeatherIcon from '../../logic-weather/getWeatherIcon'
+import getWeatherIcon from '../../helpers/getWeatherIcon'
 import { useState } from 'react'
 import logic from '../../logic'
 
