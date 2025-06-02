@@ -11,9 +11,15 @@ export default (username, email, password) => {
     Validator.password(password)
 
     return User.findOne({ email: email })
+        .catch((error) => { 
+            throw new Errors.SystemError('Unexpected error while searching for user:', error)
+        })
         .then((user) => {
             if (user) throw new Errors.DuplicityError('Email already in use')
                 return bcrypt.hash(password, 15)
+                    .catch((error) => { 
+                        throw new Errors.SystemError('Unexpected error while hashing password:', error)
+                    })
                     .then((cryptPassword) => {
                         const user = {
                             username,
@@ -21,10 +27,10 @@ export default (username, email, password) => {
                             password: cryptPassword
                         }
                         return User.create(user)
+                        .catch((error) => { 
+                            throw new Errors.SystemError('Unexpected error while creating user:', error)
+                        })
                     })
-        })
-        .catch((error) => { 
-            throw error
         })
 }
 

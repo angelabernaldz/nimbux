@@ -11,19 +11,19 @@ export default (userId) => {
 
     return User.findById(userId)
         .catch((error) => { 
-            throw error // create specific error SystemError (error inesperado)
+            throw new Errors.SystemError('Unexpected error while searching for user:', error)
         })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
             return fetch(ipApiUrl)
                 .catch((error) => { 
-                    throw error // create specific error SystemError (error inesperado)
+                    throw new Errors.SystemError('Unexpected error while fetching IP API:', error)
                 })
                 .then((response) => {
                     if (!response.ok) throw new Errors.GeoLocationAPIError('Unable to stablish connection with IP API to obtain current location')
                     return response.json()
                         .catch((error) => { 
-                            throw error // create specific error SystemError (error inesperado)
+                            throw new Errors.SystemError('Unexpected error while parsing IP API response:', error)
                         })
                         .then((data) => {
                             if (data.status === 'success') {

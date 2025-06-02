@@ -8,6 +8,9 @@ export default (userId) => {
     Validator.id(userId)
 
     return User.findById(userId)
+        .catch((error) => {
+            throw new Errors.SystemError('Unexpected error while searching for user:', error)
+        })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
             // need to convert user to plain object as it is a mongo object
@@ -18,8 +21,5 @@ export default (userId) => {
             delete user._id
             delete user.__v
             return user
-        })
-        .catch((error) => {
-            throw error
         })
 }
