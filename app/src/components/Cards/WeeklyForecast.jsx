@@ -12,7 +12,6 @@ function WeeklyForecast({ dailyForecast }) {
         precipitation: dailyForecast.precipitation_probability_max[index],
     }))
 
-    // Custom Tooltip for displaying info
     const CustomTooltip = ({ payload, label }) => {
         if (!payload || !payload.length) return null
 
@@ -31,8 +30,43 @@ function WeeklyForecast({ dailyForecast }) {
         )
     }
     
-    const minTemp = Math.min(...forecastData.map(item => item.tmin))
-    const maxTemp = Math.max(...forecastData.map(item => item.tmax))
+    const rawMin = Math.min(...forecastData.map(item => item.tmin))
+    const rawMax = Math.max(...forecastData.map(item => item.tmax))
+
+    const range = rawMax - rawMin || 1  
+    const maxTicks = 5
+
+    function niceStep(range, maxTicks) {
+        const roughStep = range / (maxTicks - 1)
+        const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)))
+        const residual = roughStep / magnitude
+
+        if (residual <= 1) return magnitude
+        if (residual <= 2) return 2 * magnitude
+        if (residual <= 5) return 5 * magnitude
+        return 10 * magnitude
+    }
+
+    let ticks = []
+    let minTemp, maxTemp
+
+    if (range < 5) {
+        minTemp = Math.floor(rawMin)
+        maxTemp = Math.ceil(rawMax)
+        for (let i = minTemp; i <= maxTemp; i++) {
+            ticks.push(i)
+        }
+    } else {
+        const step = niceStep(range, maxTicks)
+        minTemp = Math.floor(rawMin / step) * step
+        maxTemp = Math.ceil(rawMax / step) * step
+
+        for (let tick = minTemp; tick <= maxTemp; tick += step) {
+            ticks.push(+tick.toFixed(2))
+        }
+    }
+
+    console.log('Ticks:', ticks)
     
     return (
         <div className="w-auto h-[300px] bg-white shadow-md rounded-2xl p-6">
@@ -49,10 +83,10 @@ function WeeklyForecast({ dailyForecast }) {
                         padding={{ left: 30, right: 30 }}
                     />
                     <YAxis 
-                        domain={[minTemp - 2, maxTemp + 2]} 
+                        domain={[minTemp, maxTemp]} 
+                        ticks={ticks}
                         tick={{ fill: '#555' }} 
                         axisLine={false} 
-                        tickCount={6}
                         tickFormatter={(value) => `${Math.round(value)}°`} 
                         margin={{ top: 20 }} 
                         padding={{ top: 10 }}
