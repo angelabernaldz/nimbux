@@ -10,9 +10,15 @@ export default (userId, locationData, weatherData) => {
     Validator.weatherData(weatherData)
 
     return User.findById(userId)
+        .catch((error) => { 
+            throw new Errors.SystemError('Unexpected error while searching for user:', error)
+        })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
             return Location.findOne({name: locationData.name, latitude: locationData.latitude, longitude: locationData.longitude})
+                .catch((error) => { 
+                    throw new Errors.SystemError('Unexpected error while searching for location:', error)
+                })
                 .then((location) => {
                     if (!location) throw new Errors.ExistenceError('Location does not exist in the database. It needs to be added first.')
 
@@ -26,8 +32,5 @@ export default (userId, locationData, weatherData) => {
                     location.timeLastUpdated = Date.now()
                     return location.save()
                 })
-        })
-        .catch((error) => { 
-            throw error 
         })
 }

@@ -9,7 +9,8 @@
     "DuplicityError": "Email already in use", 
     "BadRequestError": "The data provided is incorrect",
     "ServerError": "An unexpected issue occurred, please try again later",
-    "UnexpectedError": "An unexpected error occurred, please contact support"
+    "UnexpectedError": "An unexpected error occurred, please contact support",
+    "SystemError": "A system error occurred, please contact support"
   },
   "modalErrors": {
     "default": {

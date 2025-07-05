@@ -9,10 +9,10 @@ export default (userId, newUsername) => {
     Validator.username(newUsername)
 
     return User.findByIdAndUpdate(userId, { username: newUsername })
+        .catch((error) => { 
+            throw new Errors.SystemError('Unexpected error while updating username:', error)
+        })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
-        })
-        .catch((error) => { 
-            throw error
         })
 }
