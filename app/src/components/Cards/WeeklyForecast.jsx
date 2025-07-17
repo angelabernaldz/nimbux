@@ -65,8 +65,6 @@ function WeeklyForecast({ dailyForecast }) {
             ticks.push(+tick.toFixed(2))
         }
     }
-
-    console.log('Ticks:', ticks)
     
     return (
         <div className="w-auto h-[300px] bg-white shadow-md rounded-2xl p-6">
