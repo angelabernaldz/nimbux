@@ -31,7 +31,7 @@ import PartlyCloudyIcon from './partlyCloudy.jsx'
 import SnowGrainIcon from './snowGrain.jsx'
 import SunriseIcon from './sunrise.jsx'
 import ThunderstormIcon from './thunderstorm.jsx'
-import thunderstormHailIcon from './thunderstormHail.jsx'
+import ThunderstormHailIcon from './thunderstormHail.jsx'
 
 const iconsDay = {
     ClearIcon,
@@ -55,7 +55,7 @@ const iconsDay = {
     SnowGrainIcon,
     SunriseIcon,
     ThunderstormIcon,
-    thunderstormHailIcon
+    ThunderstormHailIcon
 }
 
 export default iconsDay

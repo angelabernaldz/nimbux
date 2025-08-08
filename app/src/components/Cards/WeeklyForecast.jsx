@@ -4,6 +4,10 @@ import getWeatherIcon from '../../helpers/getWeatherIcon'
 function WeeklyForecast({ dailyForecast }) {
     if (!dailyForecast || !dailyForecast.time) return null
 
+    console.log('Daily Forecast:', dailyForecast)
+
+
+
     const forecastData = dailyForecast.time.map((date, index) => ({
         day: new Date(date).toLocaleDateString('en-US', { weekday: 'long' }),
         tmin: dailyForecast.temperature_2m_min[index],
@@ -17,11 +21,20 @@ function WeeklyForecast({ dailyForecast }) {
 
         const data = payload[0].payload
 
+        const icon = getWeatherIcon(data.weather_code, 1) || 'incorrect weather icon'
+
+        try {
+
+        }
+        catch (error) {
+            
+        }
+
         return (
             <div className="bg-white p-2 rounded-lg shadow-md">
                 <div className="text-center text-sm font-medium text-gray-700">
                     <p>{label}</p>
-                    <p className="text-sm">{getWeatherIcon(data.weather_code, 1)}</p>
+                    <p className="text-sm">{getWeatherIcon(data.weather_code, 1) ? getWeatherIcon(data.weather_code, 1) : 'incorrect weather icon' } </p>
                     <p>Max: {Math.round(data.tmax)}°C</p>
                     <p>Min: {Math.round(data.tmin)}°C</p>
                     <p>Precipitation: {data.precipitation}%</p>
@@ -29,6 +42,8 @@ function WeeklyForecast({ dailyForecast }) {
             </div>
         )
     }
+
+    console.log('Forecast Data:', forecastData)
     
     const rawMin = Math.min(...forecastData.map(item => item.tmin))
     const rawMax = Math.max(...forecastData.map(item => item.tmax))
