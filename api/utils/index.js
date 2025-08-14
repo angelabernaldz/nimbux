@@ -1,3 +1,3 @@
-import { rateLimitedFetch } from' ./rateLimitedFetch.js'
+import { rateLimitedFetch } from './rateLimitedFetch.js'
 
 export { rateLimitedFetch }

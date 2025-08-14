@@ -1,6 +1,6 @@
 import models from '../data/models.js'
 import { Validator, Errors } from 'common'
-import { rateLimitedFetch } from '../utils'
+import { rateLimitedFetch } from '../utils/index.js'
 
 const { Location, User } = models
 
