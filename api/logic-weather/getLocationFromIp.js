@@ -1,5 +1,6 @@
 import models from '../data/models.js'
 import { Validator, Errors } from 'common'
+import { rateLimitedFetch } from '../utils/index.js'
 
 const { User } = models
 
@@ -15,7 +16,7 @@ export default (userId) => {
         })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
-            return fetch(ipApiUrl)
+            return rateLimitedFetch('ip-api', ipApiUrl)
                 .catch((error) => { 
                     throw new Errors.SystemError('Unexpected error while fetching IP API:', error)
                 })
