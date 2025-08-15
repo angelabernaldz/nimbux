@@ -1,5 +1,6 @@
 import models from '../data/models.js'
 import { Validator, Errors } from 'common'
+import { rateLimitedFetch } from '../utils/index.js'
 
 const { Location, User } = models
 
@@ -24,7 +25,7 @@ export default (userId, locationData) => {
                 })
                 .then((location) => {
                     if (!location) throw new Errors.ExistenceError('Location does not exist in the database. It needs to be added first.')
-                    return fetch(weatherUrl)
+                    return rateLimitedFetch('weather', weatherUrl)
                         .catch((error) => { 
                             throw new Errors.SystemError('Unexpected error while fetching Weather API:', error)
                         })

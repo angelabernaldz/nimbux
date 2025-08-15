@@ -1,5 +1,6 @@
 import models from '../data/models.js'
 import { Validator, Errors } from 'common'
+import { rateLimitedFetch } from '../utils/index.js'
 
 const { User } = models
 
@@ -16,7 +17,7 @@ export default (userId, locationString) => {
         })
         .then((user) => {
             if (!user) throw new Errors.AuthError('User id does not belong to anyone')
-            return fetch(nominatimUrl)
+            return rateLimitedFetch('nominatim', nominatimUrl)
                 .catch((error) => { 
                     throw new Errors.SystemError('Unexpected error while fetching Nominatim API:', error)
                 })
