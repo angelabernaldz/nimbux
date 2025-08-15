@@ -1,5 +1,5 @@
 import { Validator, Errors } from 'common'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import models from '../data/models.js'
 
 const { User } = models

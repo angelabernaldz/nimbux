@@ -3,7 +3,7 @@ import updateUsername from '../updateUsername.js'
 import { describe, it } from 'mocha'
 import mongoose from 'mongoose'
 import models from '../../data/models.js'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { expect } from 'chai'
 import { Errors } from 'common'
 

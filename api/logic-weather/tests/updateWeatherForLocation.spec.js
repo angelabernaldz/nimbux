@@ -3,7 +3,7 @@ import updateWeatherForLocation from '../updateWeatherForLocation.js'
 import { describe, it } from 'mocha'
 import models from '../../data/models.js'
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { expect } from 'chai'
 import { Errors } from 'common'
 

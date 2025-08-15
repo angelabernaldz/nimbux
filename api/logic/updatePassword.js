@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { Validator, Errors } from 'common'
 import models from '../data/models.js'
 

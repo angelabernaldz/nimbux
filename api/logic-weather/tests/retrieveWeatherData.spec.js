@@ -4,7 +4,7 @@ import { describe, it } from 'mocha'
 import mongoose from 'mongoose'
 import models from '../../data/models.js'
 import { expect } from 'chai'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import sinon from 'sinon'
 import { Errors } from 'common'
 
